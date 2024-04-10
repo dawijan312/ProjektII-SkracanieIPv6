@@ -4,14 +4,14 @@ using namespace std;
 
 string helpMessage()
 {
-	string message = "Program do skracania adresow IPv6\n";
-	message += "Autorzy: Dawid Janduda, Marek Paluch\n";
-	message += "U¿ycie: program [opcje] [adres]\n";
-	message += "Opcje:\n";
-	message += "-h, --help - wyœwietla pomoc\n";
-	message += "-s, --shorten - skracanie adresu\n";
-	message += "-e, --extend - rozszerzanie adresu\n";
-	message += "-c, --check - sprawdzanie poprawnoœci adresu\n";
+	string message = "IPv6 Address Shortening Program\n";
+	message += "Authors: Dawid Janduda, Marek Paluch\n";
+	message += "Usage: program [options] [address]\n";
+	message += "Options:\n";
+	message += "-h, --help - display help\n";
+	message += "-s, --shorten - shorten address\n";
+	message += "-e, --extend - extend address\n";
+	message += "-c, --check - check address validity\n";
 	return message;
 }
 
@@ -19,15 +19,15 @@ void inputMode(string switcher, string address)
 {
 	if (switcher == "-s" || switcher == "--shorten")
 	{
-		cout << "Skracanie adresu" << endl;
+		cout << "Shortening address" << endl;
 	}
 	else if (switcher == "-e" || switcher == "--extend")
 	{
-		cout << "Rozszerzanie adresu" << endl;
+		cout << "Extending address" << endl;
 	}
 	else if (switcher == "-c" || switcher == "--check")
 	{
-		cout << "Sprawdzanie poprawnoœci adresu" << endl;
+		cout << "Checking address validity" << endl;
 	}
 	else if (switcher == "-h" || switcher == "--help")
 	{
@@ -35,7 +35,7 @@ void inputMode(string switcher, string address)
 	}
 	else
 	{
-		cout << "Nieznany prze³¹cznik" << endl;
+		cout << "Unknown switch" << endl;
 	}
 }
 
@@ -45,33 +45,33 @@ void menu()
 	while (!exit)
 	{
 		system("cls");
-		cout << "Program do skracania adresów IPv6" << endl;
+		cout << "IPv6 Address Shortening Program" << endl;
 		cout << "Menu:" << endl;
-		cout << "1. Skracanie adresu" << endl;
-		cout << "2. Rozszerzanie adresu" << endl;
-		cout << "3. Sprawdzanie poprawnoœci adresu" << endl;
-		cout << "0. Wyjœcie" << endl;
-		cout << "Wybierz opcjê: ";
+		cout << "1. Shorten address" << endl;
+		cout << "2. Extend address" << endl;
+		cout << "3. Check address validity" << endl;
+		cout << "0. Exit" << endl;
+		cout << "Choose an option: ";
 		{
 			int option;
 			option = _getch();
 			switch (option)
 			{
 			case '1':
-				cout << "Skracanie adresu" << endl;
+				cout << "Shortening address" << endl;
 				break;
 			case '2':
-				cout << "Rozszerzanie adresu" << endl;
+				cout << "Extending address" << endl;
 				break;
 			case '3':
-				cout << "Sprawdzanie poprawnoœci adresu" << endl;
+				cout << "Checking address validity" << endl;
 				break;
 			case '0':
-				cout << "Wyjœcie" << endl;
+				cout << "Exit" << endl;
 				exit = true;
 				break;
 			default:
-				cout << "Nieznana opcja" << endl;
+				cout << "Unknown option" << endl;
 				break;
 			}
 

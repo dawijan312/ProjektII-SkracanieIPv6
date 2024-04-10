@@ -21,7 +21,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	SetConsoleOutputCP(65001);
-	system("title Skracanie adresów IPv6");
+	system("title IPv6 address shortener");
 
 	if (argc == 1)
 	{
@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		cout << "Za dużo argumentów" << endl;
+		cout << "To many arguments" << endl;
 		system("pause");
 	}
 
