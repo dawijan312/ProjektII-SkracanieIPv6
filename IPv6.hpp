@@ -6,7 +6,7 @@
 class IPv6
 {
 	public:
-		IPv6() {}
+		//IPv6() {};
 		IPv6(std::string address);
 		static bool validate(std::string address);
 		std::string shortened();
@@ -15,7 +15,7 @@ class IPv6
 		std::string output();
 	private:
 		std::string inputAddress;
-		uint16_t convertedAddress[8];
+		uint16_t convertedAddress[8] = {};
 		static bool checkCharacters(std::string address);
 		static bool checkPattern(std::string address);
 		void removeLeadingZeros(std::string& address);

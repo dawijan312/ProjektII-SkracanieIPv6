@@ -34,11 +34,13 @@ bool IPv6::store(string address)
 {
     if (validate(address))
     {
+        removeDoubleColon(address);
+        stringToStruct(address);
+        return true;
         regex pattern("::");
         smatch match;
         regex_search(address, match, pattern);
         int position = match.position();
-		return true;
 	}
     return false;
 }
@@ -95,10 +97,12 @@ void IPv6::removeDoubleColon(string& address)
 		return;
 
     regex patternSingle(":");
-    int countSingle = distance(sregex_iterator(address.begin(), address.end(), patternSingle), sregex_iterator()) - 2;
+    int countSingle = distance(sregex_iterator(address.begin(), address.end(), patternSingle), sregex_iterator()) - 1;
 
     string replacement;
-    if (position == 0)
+    if(countSingle == 7)
+		replacement = ":";
+    else if (position == 0)
         for(; countSingle < 8; countSingle++)
             replacement = "0:" + replacement;
 	else if (position == address.length())
@@ -127,7 +131,9 @@ void IPv6::stringToStruct(string address)
         //block to int
         convertedAddress[i] = stoi(block, nullptr, 16);
         address.erase(0, pos + 1);
+        i++;
     }
+    convertedAddress[i] = stoi(address, nullptr, 16);
 }
 
 string IPv6::output()

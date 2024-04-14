@@ -8,3 +8,4 @@
 std::string helpMessage();
 void inputMode(std::string switcher, std::string address);
 void menu();
+std::string getAddr();

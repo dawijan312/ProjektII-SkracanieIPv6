@@ -1,4 +1,5 @@
 #include "functions.hpp"
+#include "IPv6.hpp"
 
 using namespace std;
 
@@ -39,6 +40,15 @@ void inputMode(string switcher, string address)
 	}
 }
 
+string getAddr()
+{
+    string address;
+    cout << "Enter IPv6 address: ";
+    cin.ignore(256, '\n');
+    getline(cin, address);
+    return address;
+}
+
 void menu()
 {
 	bool exit = false;
@@ -50,6 +60,8 @@ void menu()
 		cout << "1. Shorten address" << endl;
 		cout << "2. Extend address" << endl;
 		cout << "3. Check address validity" << endl;
+		cout << "4. output" << endl;
+		cout << endl;
 		cout << "0. Exit" << endl;
 		cout << "Choose an option: ";
 		{
@@ -65,6 +77,18 @@ void menu()
 				break;
 			case '3':
 				cout << "Checking address validity" << endl;
+				if(IPv6::validate(getAddr()))
+					cout << "Address is valid" << endl;
+				else
+					cout << "Address is invalid" << endl;
+				break;
+			case '4':
+			{
+				cout << "Output" << endl;
+				string address = getAddr();
+				IPv6 ipv6(address);
+				cout << "Output: " << ipv6.output() << endl;
+			}
 				break;
 			case '0':
 				cout << "Exit" << endl;
