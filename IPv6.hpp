@@ -1,17 +1,24 @@
 #pragma once
 
 #include <string>
-#include <array>
+
 
 class IPv6
 {
-	struct IPv6address
-	{
-		uint16_t block[8];
-	};
-
-	static bool validate(std::string address);
-	std::string shortened();
-	std::string extended();
-	bool store(std::string address);
+	public:
+		IPv6() {}
+		IPv6(std::string address);
+		static bool validate(std::string address);
+		std::string shortened();
+		std::string extended();
+		bool store(std::string address);
+		std::string output();
+	private:
+		std::string inputAddress;
+		uint16_t convertedAddress[8];
+		static bool checkCharacters(std::string address);
+		static bool checkPattern(std::string address);
+		void removeLeadingZeros(std::string& address);
+		void removeDoubleColon(std::string& address);
+		void stringToStruct(std::string address);
 };
