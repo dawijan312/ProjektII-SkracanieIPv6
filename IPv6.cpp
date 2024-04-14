@@ -25,9 +25,14 @@ string IPv6::shortened()
 
 string IPv6::extended()
 {
-    // Implementation of the extended method
-    // ...
-    return "Not implemented";
+    string output;
+    for (int i = 0; i < 8; i++)
+    {
+        output += format("{:04x}", convertedAddress[i]);
+        if (i < 7)
+            output += ":";
+    }
+    return output;
 }
 
 bool IPv6::store(string address)

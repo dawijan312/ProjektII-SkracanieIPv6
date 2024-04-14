@@ -65,39 +65,42 @@ void menu()
 		cout << "0. Exit" << endl;
 		cout << "Choose an option: ";
 		{
-			int option;
-			option = _getch();
-			switch (option)
-			{
-			case '1':
-				cout << "Shortening address" << endl;
-				break;
-			case '2':
-				cout << "Extending address" << endl;
-				break;
-			case '3':
-				cout << "Checking address validity" << endl;
-				if(IPv6::validate(getAddr()))
-					cout << "Address is valid" << endl;
-				else
-					cout << "Address is invalid" << endl;
-				break;
-			case '4':
-			{
-				cout << "Output" << endl;
-				string address = getAddr();
-				IPv6 ipv6(address);
-				cout << "Output: " << ipv6.output() << endl;
-			}
-				break;
-			case '0':
-				cout << "Exit" << endl;
-				exit = true;
-				break;
-			default:
-				cout << "Unknown option" << endl;
-				break;
-			}
+            int option;
+            option = _getch();
+            if (option == '1')
+            {
+                cout << "Shortening address" << endl;
+            }
+            else if (option == '2')
+            {
+                cout << "Extending address" << endl;
+				IPv6 ipv6(getAddr());
+				cout << "Output: " << ipv6.extended() << endl;
+            }
+            else if (option == '3')
+            {
+                cout << "Checking address validity" << endl;
+                if (IPv6::validate(getAddr()))
+                    cout << "Address is valid" << endl;
+                else
+                    cout << "Address is invalid" << endl;
+            }
+            else if (option == '4')
+            {
+                cout << "Output" << endl;
+                string address = getAddr();
+                IPv6 ipv6(address);
+                cout << "Output: " << ipv6.output() << endl;
+            }
+            else if (option == '0')
+            {
+                cout << "Exit" << endl;
+                exit = true;
+            }
+            else
+            {
+                cout << "Unknown option" << endl;
+            }
 
 			Sleep(3000);
 		}
