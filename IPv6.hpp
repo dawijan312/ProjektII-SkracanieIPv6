@@ -19,6 +19,6 @@ class IPv6
 		static bool checkCharacters(std::string address);
 		static bool checkPattern(std::string address);
 		void removeLeadingZeros(std::string& address);
-		void removeDoubleColon(std::string& address);
+		static void removeDoubleColon(std::string& address);
 		void stringToStruct(std::string address);
 };

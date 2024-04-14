@@ -58,15 +58,18 @@ bool IPv6::checkPattern(string address)
     int countDouble = distance(sregex_iterator(address.begin(), address.end(), patternDouble), sregex_iterator());
     if (countDouble > 1)
 		return false;
-    else if (countDouble == 0)
-        return std::regex_match(address, regex("^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$"));
-    else
+    else if (countDouble == 1)
+        removeDoubleColon(address);
+    return std::regex_match(address, regex("^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$"));
+    /*else
+    {
         if(!regex_match(address, regex("^([0-9a-fA-F]{1,4}:){0,6}::([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}$")))
- 		   return false;
+           return false;
         //count ":"
         regex patternSingle(":");
         int countSingle = distance(sregex_iterator(address.begin(), address.end(), patternSingle), sregex_iterator());
         return countSingle <= 7;
+    }*/
 }
 
 void IPv6::removeLeadingZeros(string& address)
@@ -105,7 +108,7 @@ void IPv6::removeDoubleColon(string& address)
     else if (position == 0)
         for(; countSingle < 8; countSingle++)
             replacement = "0:" + replacement;
-	else if (position == address.length())
+	else if (position == address.length() - 2)
         for (; countSingle < 8; countSingle++)
             replacement = ":0" + replacement;
     else

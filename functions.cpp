@@ -44,7 +44,7 @@ string getAddr()
 {
     string address;
     cout << "Enter IPv6 address: ";
-    cin.ignore(256, '\n');
+    //cin.ignore(256, '\n');
     getline(cin, address);
     return address;
 }
@@ -99,7 +99,7 @@ void menu()
 				break;
 			}
 
-			Sleep(2000);
+			Sleep(3000);
 		}
 	}
 }
