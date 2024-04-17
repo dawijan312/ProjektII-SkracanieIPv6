@@ -20,15 +20,32 @@ void inputMode(string switcher, string address)
 {
 	if (switcher == "-s" || switcher == "--shorten")
 	{
-		cout << "Shortening address" << endl;
+		try
+		{
+			IPv6 ipv6(address);
+			cout << ipv6.shortened();
+		}
+		catch (invalid_argument e)
+		{
+			cout << e.what();
+		}
+
 	}
 	else if (switcher == "-e" || switcher == "--extend")
 	{
-		cout << "Extending address" << endl;
+		try
+		{
+			IPv6 ipv6(address);
+			cout << ipv6.extended();
+		}
+		catch (invalid_argument e)
+		{
+			cout << e.what();
+		}
 	}
 	else if (switcher == "-c" || switcher == "--check")
 	{
-		cout << "Checking address validity" << endl;
+		IPv6::validate(address) ? cout << "Address is valid" : cout << "Address is invalid";
 	}
 	else if (switcher == "-h" || switcher == "--help")
 	{
@@ -67,17 +84,31 @@ void menu()
 		{
             int option;
             option = _getch();
-            if (option == '1')
-            {
-                cout << "Shortening address" << endl;
-				IPv6 ipv6(getAddr());
-				cout << "Output: " << ipv6.shortened() << endl;
-            }
+			if (option == '1')
+			{
+				cout << "Shortening address" << endl;
+				try
+				{
+					IPv6 ipv6(getAddr());
+					cout << "Output: " << ipv6.shortened() << endl;
+				}
+				catch (invalid_argument e)
+				{
+					cout << e.what();
+				}
+			}
             else if (option == '2')
             {
                 cout << "Extending address" << endl;
-				IPv6 ipv6(getAddr());
-				cout << "Output: " << ipv6.extended() << endl;
+				try
+				{
+					IPv6 ipv6(getAddr());
+					cout << "Output: " << ipv6.extended() << endl;
+				}
+				catch (invalid_argument e)
+				{
+					cout << e.what();
+				}
             }
             else if (option == '3')
             {
@@ -90,9 +121,15 @@ void menu()
             else if (option == '4')
             {
                 cout << "Output" << endl;
-                string address = getAddr();
-                IPv6 ipv6(address);
-                cout << "Output: " << ipv6.output() << endl;
+                try
+				{
+					IPv6 ipv6(getAddr());
+					cout << "Output: " << ipv6.output() << endl;
+				}
+				catch (invalid_argument e)
+				{
+					cout << e.what();
+				}
             }
             else if (option == '0')
             {
