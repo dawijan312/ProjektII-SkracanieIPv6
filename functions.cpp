@@ -70,6 +70,8 @@ void menu()
             if (option == '1')
             {
                 cout << "Shortening address" << endl;
+				IPv6 ipv6(getAddr());
+				cout << "Output: " << ipv6.shortened() << endl;
             }
             else if (option == '2')
             {

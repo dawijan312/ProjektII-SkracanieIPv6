@@ -18,9 +18,44 @@ IPv6::IPv6(string address)
 
 string IPv6::shortened()
 {
-    // Implementation of the shortened method
-    // ...
-    return "Not implemented";
+    // find the longest sequence of zeros
+    int longest = 0;
+    int current = 0;
+    int position = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        if (convertedAddress[i] == 0)
+        {
+			current++;
+            if (current > longest)
+            {
+				longest = current;
+				position = i - longest + 1;
+			}
+		}
+		else
+			current = 0;
+	}
+    // if the longest sequence is only one zero, return the address
+	if (longest == 1)
+		return output();
+	// if the longest sequence is more than one zero, return the shortened address
+    else
+    {
+		string output;
+        for (int i = 0; i < 8; i++)
+        {
+			if (i == position)
+				output += ":";
+            if (i < position || i >= position + longest)
+            {
+				output += format("{:x}", convertedAddress[i]);
+				if (i < 7 && (i < position || i >= position + longest - 1))
+					output += ":";
+			}
+		}
+		return output;
+	}
 }
 
 string IPv6::extended()
