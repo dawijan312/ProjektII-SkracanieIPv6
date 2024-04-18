@@ -94,6 +94,10 @@ inline bool IPv6::checkCharacters(string address)
 
 bool IPv6::checkPattern(string address)
 {
+    // if there is triple colon, return
+    if (address.size() > 2 && address.find(":::") != string::npos)
+        return false;
+
     // count "::" number occurences using regex_iterator
     regex patternDouble("::");
         
