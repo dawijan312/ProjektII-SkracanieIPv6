@@ -131,20 +131,30 @@ void IPv6::removeLeadingZeros(string& address)
 void IPv6::removeDoubleColon(string& address)
 {
     // check position of a double colon
-	regex pattern("::");
-	smatch match;
+    regex pattern("::");
+    smatch match;
     regex_search(address, match, pattern);
     int position = match.position();
     // if there is no double colon, return
     if (position == string::npos)
-		return;
+        return;
+    else if (position == 0 && address.length() == 2)
+    {
+        address = "0:0:0:0:0:0:0:0";
+        return;
+    }
 
     regex patternSingle(":");
     int countSingle = distance(sregex_iterator(address.begin(), address.end(), patternSingle), sregex_iterator()) - 1;
 
     string replacement;
     if(countSingle == 7)
-		replacement = ":";
+        if(position == 0)
+			replacement = "0:";
+		else if(position == address.length() - 2)
+            replacement = ":0";
+		else
+		    replacement = ":0:";
     else if (position == 0)
         for(; countSingle < 8; countSingle++)
             replacement = "0:" + replacement;

@@ -15,6 +15,7 @@
 #include <windows.h>
 
 #include "functions.hpp"
+#include "IPv6.hpp"
 
 using namespace std;
 
