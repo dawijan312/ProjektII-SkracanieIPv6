@@ -64,6 +64,9 @@ namespace ProjektIITesty
 			Assert::IsFalse(IPv6::validate("::1:2:3:4:5:"));
 			Assert::IsFalse(IPv6::validate("::1:2:3:4:5:6:"));
 			Assert::IsFalse(IPv6::validate("::1:2:3:4:5:6:7:"));
+
+			Assert::IsFalse(IPv6::validate("1:2:3:4"));
+			Assert::IsFalse(IPv6::validate("fe80:2030:31:24"));
 		}
 		TEST_METHOD(TestValidateInvalid2)
 		{
@@ -74,6 +77,7 @@ namespace ProjektIITesty
 			Assert::IsFalse(IPv6::validate("1000000000000::"));
 			Assert::IsFalse(IPv6::validate("AAAAA:BBBBB::"));
 			Assert::IsFalse(IPv6::validate("G::H"));
+			Assert::IsFalse(IPv6::validate("127.0.0.1"));
 		}
 
 		TEST_METHOD(TestShortened)
@@ -101,6 +105,33 @@ namespace ProjektIITesty
 			Assert::AreEqual("0:0:0:0:0:0:0:0", ip.output().c_str());
 			ip.store("2a01:0:0:78b4::1");
 			Assert::AreEqual("2a01:0:0:78b4:0:0:0:1", ip.output().c_str());
+		}
+
+		TEST_METHOD(TestStore)
+		{
+			IPv6 ip("::");
+			Assert::IsTrue(ip.store("::"));
+			Assert::IsTrue(ip.store("2a01:0:0:78b4::1"));
+			Assert::IsTrue(ip.store("2a01:0000:0000:78b4:0000:0000:0000:0001"));
+			Assert::IsFalse(ip.store("2a01:0:0:78b4:::1:1"));
+			Assert::IsFalse(ip.store(""));
+			Assert::IsFalse(ip.store("12345::"));
+		}
+
+		TEST_METHOD(TestConstructor)
+		{
+			Assert::ExpectException<std::invalid_argument>([] {IPv6 ip("::::"); });
+			Assert::ExpectException<std::invalid_argument>([] {IPv6 ip(""); });
+			try
+			{
+				IPv6 ip("::");
+				IPv6 ip2("2a01:0:0:78b4::1");
+				IPv6 ip3("2a01:0000:0000:78b4:0000:0000:0000:0001");
+			}
+			catch (...)
+			{
+				Assert::Fail(L"Constructor failed");
+			}
 		}
 	};
 }
