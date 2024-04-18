@@ -37,8 +37,10 @@ string IPv6::shortened()
 			current = 0;
 	}
     // if the longest sequence is only one zero, return the address
-	if (longest == 1)
+	if (longest == 0)
 		return output();
+    else if(longest == 8)
+		return "::";
 	// if the longest sequence is more than one zero, return the shortened address
     else
     {
