@@ -79,7 +79,9 @@ void menu()
 		cout << "3. Check address validity" << endl;
 		cout << "4. Output" << endl;
 		cout << endl;
+		cout << "9. Help" << endl;
 		cout << "0. Exit" << endl;
+		cout << endl;
 		cout << "Choose an option: ";
 		{
             int option;
@@ -131,6 +133,11 @@ void menu()
 					cout << e.what();
 				}
             }
+			else if (option == '9')
+			{
+				cout << "Help" << endl;
+				cout << helpMessage() << endl;
+			}
             else if (option == '0')
             {
                 cout << "Exit" << endl;
@@ -141,7 +148,8 @@ void menu()
                 cout << "Unknown option" << endl;
             }
 
-			Sleep(3000);
+			cout << endl;
+			system("pause");
 		}
 	}
 }
