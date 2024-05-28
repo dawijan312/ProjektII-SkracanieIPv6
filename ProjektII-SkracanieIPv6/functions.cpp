@@ -77,7 +77,7 @@ void menu()
 		cout << "1. Shorten address" << endl;
 		cout << "2. Extend address" << endl;
 		cout << "3. Check address validity" << endl;
-		cout << "4. output" << endl;
+		cout << "4. Output" << endl;
 		cout << endl;
 		cout << "0. Exit" << endl;
 		cout << "Choose an option: ";
