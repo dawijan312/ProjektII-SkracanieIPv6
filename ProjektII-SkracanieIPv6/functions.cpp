@@ -13,6 +13,8 @@ string helpMessage()
 	message += "-s, --shorten - shorten address\n";
 	message += "-e, --extend - extend address\n";
 	message += "-c, --check - check address validity\n";
+	message += "-o, --output - output address\n";
+	message += "Address - IPv6 address\n";
 	return message;
 }
 
@@ -50,6 +52,18 @@ void inputMode(string switcher, string address)
 	else if (switcher == "-h" || switcher == "--help")
 	{
 		cout << helpMessage();
+	}
+	else if (switcher == "-o" || switcher == "--output")
+	{
+		try
+		{
+			IPv6 ipv6(address);
+			cout << ipv6.output();
+		}
+		catch (invalid_argument e)
+		{
+			cout << e.what();
+		}
 	}
 	else
 	{
